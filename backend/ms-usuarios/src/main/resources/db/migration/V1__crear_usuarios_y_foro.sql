@@ -1,0 +1,17 @@
+CREATE TABLE usuarios (
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ nombre VARCHAR(120) NOT NULL,
+ correo VARCHAR(254) NOT NULL,
+ password_hash VARCHAR(100) NOT NULL,
+ rol VARCHAR(20) NOT NULL,
+ activo BOOLEAN NOT NULL DEFAULT TRUE,
+ CONSTRAINT uk_usuario_correo UNIQUE(correo)
+);
+CREATE TABLE foro_publicaciones (
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ usuario_id BIGINT NOT NULL,
+ kit VARCHAR(160) NOT NULL,
+ pregunta VARCHAR(2000) NOT NULL,
+ creado_en TIMESTAMP(6) NOT NULL,
+ CONSTRAINT fk_foro_usuario FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+);
